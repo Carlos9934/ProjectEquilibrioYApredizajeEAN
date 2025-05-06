@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equilibrio y Aprendizaje Natural EAN</title>
+  <link href="/tailwind.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 min-h-screen font-sans">
+  <nav class="bg-white shadow p-4 flex justify-between items-center sticky top-0 z-40">
+    <div class="flex items-center gap-4 cursor-pointer" id="navHome">
+      <img src="/ean-logo.png" alt="EAN Logo" class="h-10 w-auto">
+      <span class="text-2xl font-bold text-green-700">Equilibrio y Aprendizaje Natural <span class="text-green-900">EAN</span></span>
+    </div>
+    <div class="flex gap-4 items-center">
+      <button id="navCourses" class="text-green-700 hover:underline font-semibold">Cursos</button>
+      <button id="navRegister" class="text-green-700 hover:underline font-semibold">Registrarse</button>
+      <button id="navLogin" class="text-green-700 hover:underline font-semibold">Iniciar sesión</button>
+      <button id="navLogout" class="bg-red-500 text-white px-3 py-1 rounded hidden">Salir</button>
+      <span id="navbarUser" class="ml-2 text-gray-700"></span>
+    </div>
+  </nav>
+
+  <header class="bg-gray-100 py-8 mb-8">
+    <div class="max-w-5xl mx-auto px-4">
+      <h1 class="text-4xl font-bold mb-2">Cursos</h1>
+      <nav class="text-gray-500 text-sm mb-2">
+        <span>Inicio</span> &gt; <span class="font-semibold text-black">Cursos</span>
+      </nav>
+    </div>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-4">
+    <div id="authSection"></div>
+    <div id="mainContent" style="display:none"></div>
+    <div class="flex flex-col md:flex-row gap-8">
+      <!-- Filtros laterales -->
+      <aside class="w-full md:w-1/4 mb-8 md:mb-0">
+        <form id="filtersForm" class="bg-white rounded shadow p-4 flex flex-col gap-4">
+          <input type="text" id="searchInput" placeholder="Buscar cursos..." class="border p-2 rounded">
+          <div>
+            <div class="font-semibold mb-2">Categoría</div>
+            <div class="flex flex-col gap-1">
+              <label><input type="checkbox" name="category" value="Ayuda psicológica"> Ayuda psicológica</label>
+              <label><input type="checkbox" name="category" value="Hábitos Atómicos"> Hábitos Atómicos</label>
+              <label><input type="checkbox" name="category" value="Mindfulness"> Mindfulness</label>
+              <label><input type="checkbox" name="category" value="Relajación"> Relajación</label>
+              <label><input type="checkbox" name="category" value="Stress Relief"> Stress Relief</label>
+              <label><input type="checkbox" name="category" value="Productividad"> Productividad</label>
+              <label><input type="checkbox" name="category" value="Gestión del tiempo"> Gestión del tiempo</label>
+              <label><input type="checkbox" name="category" value="Técnicas de estudio"> Técnicas de estudio</label>
+              <label><input type="checkbox" name="category" value="Nutrición y salud"> Nutrición y salud</label>
+              <label><input type="checkbox" name="category" value="Ejercicio y movimiento"> Ejercicio y movimiento</label>
+              <label><input type="checkbox" name="category" value="Creatividad"> Creatividad</label>
+              <label><input type="checkbox" name="category" value="Liderazgo y trabajo en equipo"> Liderazgo y trabajo en equipo</label>
+            </div>
+          </div>
+          <button type="button" id="clearFilters" class="border border-green-500 text-green-700 rounded px-2 py-1 mt-2">Limpiar filtros</button>
+        </form>
+      </aside>
+      <!-- Catálogo de cursos -->
+      <section class="flex-1">
+        <div class="flex justify-between items-center mb-4">
+          <div></div>
+          <select id="sortSelect" class="border p-2 rounded">
+            <option value="newest">Fecha de lanzamiento (más nuevos primero)</option>
+            <option value="oldest">Fecha de lanzamiento (más antiguos primero)</option>
+            <option value="duration">Duración</option>
+          </select>
+        </div>
+        <div id="coursesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Aquí van las tarjetas de curso -->
+          <div class="bg-white rounded shadow p-4 flex flex-col">
+            <img src="/ean-logo.png" alt="Portada curso" class="rounded mb-2 h-36 object-cover">
+            <div class="flex justify-between items-center mb-1">
+              <span class="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">All Levels</span>
+              <span class="bg-yellow-200 text-yellow-800 text-xs px-2 py-1 rounded flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3" /></svg>3 Horas</span>
+            </div>
+            <div class="font-bold mb-1">Nombre del Curso</div>
+            <div class="text-gray-600 text-sm mb-2">Breve descripción del curso para motivar a los estudiantes.</div>
+            <div class="text-xs text-gray-400">Categoría: Mindfulness</div>
+          </div>
+          <!-- Más tarjetas aquí... -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <button id="openAddVideo" class="fixed bottom-8 right-8 bg-green-600 text-white rounded-full shadow-lg w-16 h-16 flex items-center justify-center text-3xl hover:bg-green-700 z-50" title="Agregar Video">
+    +
+  </button>
+
+  <!-- Add Video Modal -->
+  <div id="addVideoModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div class="bg-white p-8 rounded shadow-lg w-full max-w-md relative">
+      <button id="closeAddVideo" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700 text-2xl">&times;</button>
+      <h3 class="text-lg font-bold mb-4">Agregar Nuevo Video</h3>
+      <form id="addVideoForm" class="flex flex-col gap-4">
+        <input type="text" name="title" placeholder="Título" required class="border p-2 rounded">
+        <textarea name="description" placeholder="Descripción" class="border p-2 rounded"></textarea>
+        <input type="url" name="url" placeholder="URL de YouTube" required class="border p-2 rounded">
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">Agregar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html> 

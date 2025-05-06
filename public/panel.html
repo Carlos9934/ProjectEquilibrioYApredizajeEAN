@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Usuario | EAN</title>
+  <link href="/tailwind.css" rel="stylesheet">
+  <script>
+    // Redirigir a login.html si no hay sesión
+    if (!localStorage.getItem('token') || !localStorage.getItem('user')) {
+      window.location.href = '/login.html';
+    }
+  </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+  <nav class="bg-white shadow p-4 flex justify-between items-center sticky top-0 z-40">
+    <div class="flex items-center gap-4 cursor-pointer" id="navHome">
+      <img src="/ean-logo.png" alt="EAN Logo" class="h-10 w-auto">
+      <span class="text-2xl font-bold text-green-700">Equilibrio y Aprendizaje Natural <span class="text-green-900">EAN</span></span>
+    </div>
+    <div class="flex gap-4 items-center">
+      <button id="navCatalog" class="text-green-700 hover:underline font-semibold">Catálogo</button>
+      <button id="navLogout" class="bg-red-500 text-white px-3 py-1 rounded">Salir</button>
+      <span id="navbarUser" class="ml-2 text-gray-700"></span>
+    </div>
+  </nav>
+  <main class="max-w-4xl mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Panel de Usuario</h1>
+    <section class="mb-10">
+      <h2 class="text-xl font-semibold mb-4">Tus Cursos Inscritos</h2>
+      <div id="userCourses" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+    </section>
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Tus Badges</h2>
+      <div id="userBadges" class="flex flex-wrap gap-4"></div>
+    </section>
+  </main>
+  <script src="/panel.js"></script>
+</body>
+</html> 
